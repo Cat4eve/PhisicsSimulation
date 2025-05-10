@@ -8,6 +8,8 @@
 package org.opensourcephysics.controls;
 import java.security.spec.AlgorithmParameterSpec;
 import java.security.spec.KeySpec;
+import java.util.Base64;
+
 import javax.crypto.Cipher;
 import javax.crypto.SecretKey;
 import javax.crypto.SecretKeyFactory;
@@ -122,7 +124,7 @@ public class Cryptic {
         dec = Base64Coder.decode(cryptic);
       } catch(IllegalArgumentException ex) {
         // decode legacy files encoded with sun encoder
-        dec = new sun.misc.BASE64Decoder().decodeBuffer(cryptic);
+        dec = Base64.getDecoder().decode(cryptic);
       }
       byte[] bytes = dcipher.doFinal(dec);
       return new String(bytes, encoding);
